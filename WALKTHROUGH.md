@@ -481,7 +481,9 @@ files are produced and verified, the five limitations, and every data file with 
 
 Purpose and Big Idea, audience and the action asked of them, the narrative structure act by act, the
 design rationale (marks and channels, the label's colours, graphical integrity, the declared
-non-linear ramp, data-ink, accessibility), how it was built, the GenAI declaration and references.
+non-linear ramp, data-ink, accessibility), how it was built, and references. The generative AI
+declaration is deliberately **not** on the website; it is submitted as a separate file (copy in
+§16).
 
 ---
 
@@ -634,7 +636,7 @@ Standby power is left out of every chart rather than imputed (missing for 854 ro
 ├── index.html                 Story — four acts, four D3 charts
 ├── explore.html               Explorer — filters, brand chart, table, model pricing
 ├── data.html                  Data & method — provenance, quality log, KNIME chain, limits
-├── about.html                 About — audience, design rationale, GenAI declaration
+├── about.html                 About — audience, design rationale, references
 ├── WALKTHROUGH.md             This document
 ├── README.md                  Front page: what it is and how to run it
 ├── CLAUDE_GUIDE.md            Step-by-step: clone, run, present, deploy on a Mac

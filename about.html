@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About this project</title>
-  <meta name="description" content="Who this data story is for, what it is trying to achieve, the design decisions behind it, and the generative AI declaration.">
+  <meta name="description" content="Who this data story is for, what it is trying to achieve, and the design decisions behind it.">
   <link rel="icon" href="assets/img/PowerIcon.png" type="image/png">
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
@@ -227,46 +227,11 @@
       </div>
     </section>
 
-    <!-- ============ GENAI ============ -->
+    <!-- ============ REFERENCES ============ -->
     <section class="section">
       <div class="wrap wrap--text stack">
-        <span class="eyebrow">Declaration</span>
-        <h2>Generative AI use</h2>
-
-        <p>
-          Generative AI (Claude, by Anthropic) was used in the production of this project. This
-          declaration records what it did and what it did not do.
-        </p>
-
-        <h3>Where it was used</h3>
-        <ul class="tick-list">
-          <li>Profiling the raw dataset to surface the data quality issues listed on the Data &amp;
-              method page.</li>
-          <li>Designing the KNIME node sequence and writing the reference script that mirrors it.</li>
-          <li>Generating a first draft of the KNIME workflow file. That draft did not load cleanly;
-              the author debugged it and rebuilt the broken nodes by hand in KNIME, and the submitted
-              workflow is the hand-repaired version.</li>
-          <li>Checking the KNIME outputs against the reference script, value by value.</li>
-          <li>Writing the D3 chart code, the CSS design system and the page markup.</li>
-          <li>Drafting and editing the written copy on all four pages.</li>
-        </ul>
-
-        <h3>Where it was not used</h3>
-        <ul class="tick-list">
-          <li>No data was generated, estimated, imputed or invented. Every figure traces to the
-              source file.</li>
-          <li>The choice of story, audience and argument was the author's.</li>
-          <li>No AI-generated text was accepted without checking the number behind it.</li>
-        </ul>
-
-        <h3>Verification</h3>
-        <p>
-          Every quantity quoted in the prose was recomputed from the source dataset and cross-checked
-          against the generated CSVs. The author reviewed, tested and modified all code, and takes
-          full responsibility for the accuracy of the final submission.
-        </p>
-
-        <h3 style="margin-top:var(--sp-5)">References</h3>
+        <span class="eyebrow">Sources</span>
+        <h2>References</h2>
         <ul class="small muted" style="padding-left:1.2em">
           <li>Department of Climate Change, Energy, the Environment and Water (2026).
               <em>Energy Rating data for household appliances &mdash; Labelled products.</em> data.gov.au. CC BY 4.0.</li>

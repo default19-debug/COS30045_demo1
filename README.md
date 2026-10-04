@@ -41,7 +41,7 @@ Presenting from a Mac, or asking Claude Code to set it up: see [`CLAUDE_GUIDE.md
 | `index.html` — Story | The four-act argument, four D3 charts: scatter, beeswarm, heat map, range bars with sliders |
 | `explore.html` — Explore | All 4,599 models: filters, brand efficiency chart, sortable table, per-model running cost |
 | `data.html` — Data & method | Provenance, privacy, the data quality log, the KNIME node chain, limitations |
-| `about.html` — About | Audience, design rationale, GenAI declaration, references |
+| `about.html` — About | Audience, design rationale, references |
 
 ---
 
@@ -110,5 +110,5 @@ Generative AI (**Claude**, by Anthropic) was used for data profiling, designing 
 sequence and drafting the first workflow file (debugged and rebuilt by hand by the author), the
 Python reference and verification scripts, the D3, CSS and HTML code, and drafting copy. It was
 **not** used to generate, estimate or impute any data, or to choose the story, audience or argument.
-Every figure was checked against the source data. Full declaration: `about.html` and
-`WALKTHROUGH.md` §16.
+Every figure was checked against the source data. The full declaration is submitted
+separately, not on the website; a copy is in `WALKTHROUGH.md` §16.
