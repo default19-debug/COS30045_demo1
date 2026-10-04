@@ -1,0 +1,7 @@
+# Normalise text files; keep data files byte-for-byte as the pipeline wrote them.
+* text=auto
+*.sh text eol=lf
+*.csv -text
+*.knwf binary
+*.docx binary
+*.png binary

@@ -1,0 +1,4 @@
+screen_tech,models,kwh_min,kwh_median,kwh_max
+LCD,72,338.0,398.0,890.0
+LCD (LED),688,185.0,464.0,1135.0
+OLED,70,313.0,448.0,630.0

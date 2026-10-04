@@ -1,0 +1,21 @@
+# KNIME's working copy of the workflow: saved with data and tied to this machine's paths.
+# The portable, submitted version is knime/TV_Energy_TriTran.knwf.
+knime/TV_Energy_TriTran/
+knime/_staging/
+
+# Operating system and editor files
+.DS_Store
+._*
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+~$*
+
+# Python
+__pycache__/
+*.pyc
+
+# Never commit credentials
+.env
+*.pem
