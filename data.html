@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en-AU" class="no-js">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data &amp; method</title>
+  <meta name="description" content="Where the television energy data comes from, what was wrong with it, how it was cleaned in KNIME, and what the figures can and cannot support.">
+  <link rel="icon" href="assets/img/PowerIcon.png" type="image/png">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="brand" href="index.html" aria-label="The Price of a Bigger Picture, home">
+          <img class="brand__mark" src="assets/img/PowerIcon.png" alt="">
+          <span class="brand__text">
+            <b>The Price of a Bigger Picture</b>
+            <span class="brand__tag">Television energy use in Australia</span>
+          </span>
+        </a>
+        <ul class="nav__list">
+          <li><a class="nav__link" href="index.html">Story</a></li>
+          <li><a class="nav__link" href="explore.html">Explore</a></li>
+          <li><a class="nav__link is-active" href="data.html" aria-current="page">Data &amp; method</a></li>
+          <li><a class="nav__link" href="about.html">About</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Switch theme">&#9790;</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" style="padding-block: var(--sp-6)">
+      <div class="wrap">
+        <p class="hero__kicker">Data &amp; method</p>
+        <h1 style="font-size: var(--fs-2xl); max-width: 30ch">Where these numbers come from</h1>
+        <p class="hero__standfirst">
+          Everything on this site is derived from one public file. This page records where it came
+          from, what was wrong with it, every change made to it, and the things it cannot be used to
+          claim.
+        </p>
+        <div class="hero__meta" data-d3-provenance
+             data-file="tv_2026_10_04.csv" data-models="4,599" data-retrieved="4 October 2026"></div>
+      </div>
+    </section>
+
+    <!-- ============ SOURCE & GOVERNANCE ============ -->
+    <section class="section">
+      <div class="wrap">
+        <h2>1. Source and governance</h2>
+
+        <div class="grid grid--2" style="align-items:start">
+          <div class="stack">
+            <p>
+              Australia and New Zealand run the <b>Greenhouse and Energy Minimum Standards</b> (GEMS)
+              scheme. A television cannot legally be sold in either country unless the supplier
+              registers it, submits energy test results measured under a prescribed standard, and
+              carries the Energy Rating Label. The registration database is published openly.
+            </p>
+            <p>
+              This matters for how the data can be read: it is <b>not a survey or a sample</b>. It is
+              an administrative census of the legal market. There is no sampling error to worry about,
+              and no response bias. What there is instead is <em>registration</em> bias, described in
+              the limitations below.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card__tag">Provenance</span>
+            <dl class="meta">
+              <dt>Dataset</dt>
+              <dd>Energy Rating data for household appliances &mdash; Labelled products</dd>
+              <dt>Resource</dt>
+              <dd class="mono">tv_2026_10_04.csv</dd>
+              <dt>Publisher</dt>
+              <dd>Dept. of Climate Change, Energy, the Environment and Water</dd>
+              <dt>Portal</dt>
+              <dd><a href="https://data.gov.au/data/dataset/energy-rating-for-household-appliances">data.gov.au</a></dd>
+              <dt>Licence</dt>
+              <dd>Creative Commons Attribution 4.0</dd>
+              <dt>Retrieved</dt>
+              <dd>4 October 2026</dd>
+              <dt>Extent</dt>
+              <dd>5,030 rows &times; 32 columns</dd>
+              <dt>Dictionary</dt>
+              <dd><a href="https://data.gov.au/data/dataset/559708e5-480e-4f94-8429-c49571e82761/resource/8b0450be-2cc6-4f5d-b885-4f1e0fb9ee64/download/televisionsmay2015.docx">Televisions data dictionary</a> (May 2015)</dd>
+            </dl>
+          </div>
+        </div>
+
+        <h3 style="margin-top:var(--sp-6)">Privacy assessment</h3>
+        <p class="muted" style="max-width:var(--maxw-text)">
+          The dataset contains no personal information. Every record describes a manufactured
+          product, and the only named parties are companies acting as registrants, which is
+          commercial rather than personal data and is published deliberately as part of a regulatory
+          disclosure regime. No anonymisation, aggregation or suppression was required before
+          publishing these visualisations, and no re-identification risk arises from joining it with
+          anything else on this site.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ DATA QUALITY ============ -->
+    <section class="section section--tint">
+      <div class="wrap">
+        <h2>2. What was wrong with it</h2>
+        <p class="lede" style="max-width:var(--maxw-text)">
+          The file is well maintained but not analysis-ready. Ten issues had to be resolved before
+          any chart could be trusted. Each is listed with the evidence that found it and the decision
+          taken.
+        </p>
+
+        <div class="table-wrap" style="margin-top:var(--sp-4)">
+          <table>
+            <caption>Data quality log. Categories follow Han, Kamber &amp; Pei (2011).</caption>
+            <thead>
+              <tr>
+                <th scope="col">Issue</th>
+                <th scope="col">Evidence</th>
+                <th scope="col">Decision</th>
+                <th scope="col">Quality dimension</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Inconsistent brand naming</th>
+                <td><code>SAMSUNG ELECTRONICS</code>, <code>Samsung</code> and <code>SAMSUNG</code> are
+                    three strings for one company; <code>Kogan</code>/<code>KOGAN</code>/<code>kogan</code>
+                    likewise. 93 raw brand strings.</td>
+                <td>Trim and upper-case, then merge three documented aliases. 93 &rarr; 74 brands.</td>
+                <td>Consistency</td>
+              </tr>
+              <tr>
+                <th scope="row">Missing values written as <code>-</code></th>
+                <td>854 rows carry a literal hyphen in the three standby-power columns, which forces
+                    the whole column to parse as text.</td>
+                <td>Recode <code>-</code> to null, then convert to double. Standby is not used in any
+                    headline figure, so no imputation was needed.</td>
+                <td>Completeness</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>Tuner Type</code> uses <code>unknown</code></th>
+                <td>116 rows use the string <code>unknown</code> as a second null convention.</td>
+                <td>Recoded to null so the conventions agree.</td>
+                <td>Consistency</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>Star</code> and <code>SRI</code> use <code>N/A</code></th>
+                <td>9,435 cells carry the literal string <code>N/A</code> &mdash; a
+                    <em>third</em> null convention in the same file, alongside empty and
+                    <code>-</code>. It is why both columns are read as text rather than numbers.</td>
+                <td>No action: both columns are dropped as deprecated. Recorded because three
+                    different null conventions in one file is the clearest single illustration of
+                    why null rules have to be checked per column, not assumed.</td>
+                <td>Consistency</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>Star</code> and <code>SRI</code> 94% empty</th>
+                <td>4,716 of 5,030 rows are null.</td>
+                <td>Dropped. The dictionary states <code>Star</code> is superseded by
+                    <code>Star2</code>, which is complete &mdash; so this is a deprecated column, not
+                    missing data. <code>Star2</code> used throughout.</td>
+                <td>Interpretability</td>
+              </tr>
+              <tr>
+                <th scope="row">Columns with no information</th>
+                <td><code>GrandDate</code> is 100% null. <code>SubmitStatus</code>,
+                    <code>Product Class</code> and <code>What test standard was used</code> each hold
+                    a single value for every row.</td>
+                <td>Dropped &mdash; zero variance cannot support a visual encoding.</td>
+                <td>Completeness</td>
+              </tr>
+              <tr>
+                <th scope="row">Repeat registrations</th>
+                <td>240 brand + model pairs occur more than once, including near-duplicate suffixes
+                    such as <code>QA65QN900B*</code>, <code>QA65QN900BS</code>, <code>QA65QN900BW</code>.</td>
+                <td>Keep the first occurrence, so one physical model counts once and popular models
+                    do not dominate a median.</td>
+                <td>Accuracy</td>
+              </tr>
+              <tr>
+                <th scope="row">Mixed-market rows</th>
+                <td><code>SoldIn</code> is a comma-separated list; 180 rows are New Zealand or Fiji
+                    only.</td>
+                <td>Filtered to rows containing <code>Australia</code>, matching the story's scope.</td>
+                <td>Accuracy</td>
+              </tr>
+              <tr>
+                <th scope="row">Units not fit for the audience</th>
+                <td><code>screensize</code> is a diagonal in centimetres; <code>Screen_Area</code> is
+                    in cm&sup2;. Australian retail sells televisions in inches.</td>
+                <td>Derived <code>inches</code> and <code>screen_m2</code>. Original columns kept.</td>
+                <td>Interpretability</td>
+              </tr>
+              <tr>
+                <th scope="row">Data dictionary defect</th>
+                <td>The published dictionary maps <code>Act_stnd_power</code> to the identifier
+                    <code>act_stnd_time</code> and <code>Act_stnd_time</code> to
+                    <code>act_stnd_power</code> &mdash; the two are swapped. It also documents a
+                    <code>CEC</code> column that no longer exists under that name.</td>
+                <td>Column headers taken at face value, since the value ranges support them
+                    (<code>Act_stnd_time</code> holds 0&ndash;14, consistent with hours). Recorded
+                    here as a defect in the documentation, not the data.</td>
+                <td>Interpretability</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PIPELINE ============ -->
+    <section class="section">
+      <div class="wrap">
+        <h2>3. How it was processed</h2>
+        <p class="lede" style="max-width:var(--maxw-text)">
+          Cleaning and aggregation are done in a 29-node KNIME workflow: one cleaning chain, three
+          output branches, and an audit branch that profiles the raw file. Node numbers below are the
+          numbers shown on the KNIME canvas, so every row can be found in the workflow.
+        </p>
+
+        <div class="table-wrap">
+          <table>
+            <caption>KNIME node chain, with the row and column count leaving each node.</caption>
+            <thead>
+              <tr>
+                <th scope="col" style="width:3rem">#</th>
+                <th scope="col">Node</th>
+                <th scope="col">What it does</th>
+                <th scope="col" class="num">Rows out</th>
+                <th scope="col" class="num">Cols</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="rank">1</td><th scope="row">CSV Reader</th><td>Read the raw registration extract</td><td class="num">5,030</td><td class="num">32</td></tr>
+              <tr><td class="rank">2</td><th scope="row">Column Filter</th><td>Drop 15 empty, constant or administrative columns</td><td class="num">5,030</td><td class="num">17</td></tr>
+              <tr><td class="rank">3</td><th scope="row">Rule-based Row Filter</th><td><code>SoldIn</code> contains &ldquo;Australia&rdquo;</td><td class="num">4,850</td><td class="num">17</td></tr>
+              <tr><td class="rank">4</td><th scope="row">Rule-based Row Filter</th><td><code>Availability Status</code> = Available</td><td class="num">4,839</td><td class="num">17</td></tr>
+              <tr><td class="rank">5&ndash;7</td><th scope="row">String Manipulation &times;3</th><td>Strip the <code>-</code> placeholder from the three standby columns</td><td class="num">4,839</td><td class="num">20</td></tr>
+              <tr><td class="rank">8</td><th scope="row">String To Number</th><td>Standby columns to double; <code>-</code> becomes missing</td><td class="num">4,839</td><td class="num">20</td></tr>
+              <tr><td class="rank">9</td><th scope="row">String Manipulation</th><td>Trim and upper-case <code>Brand_Reg</code> into <code>Brand</code>, 88 &rarr; 77</td><td class="num">4,839</td><td class="num">21</td></tr>
+              <tr><td class="rank">10</td><th scope="row">Rule Engine</th><td>Merge three documented aliases, 77 &rarr; 74 brands</td><td class="num">4,839</td><td class="num">21</td></tr>
+              <tr><td class="rank">11</td><th scope="row">Duplicate Row Filter</th><td>One row per <code>Brand</code> + <code>Model_No</code>, first kept</td><td class="num">4,599</td><td class="num">21</td></tr>
+              <tr><td class="rank">12&ndash;16</td><th scope="row">Math Formula &times;5</th><td>Derive inches, m&sup2;, $/yr, W/m&sup2;, kWh/m&sup2;</td><td class="num">4,599</td><td class="num">26</td></tr>
+              <tr><td class="rank">17</td><th scope="row">Rule Engine</th><td>Bin screen size into eight retail bands</td><td class="num">4,599</td><td class="num">27</td></tr>
+              <tr><td class="rank">18</td><th scope="row">Math Formula</th><td>Whole-star rating for the heat-map axis</td><td class="num">4,599</td><td class="num">28</td></tr>
+              <tr><td class="rank">28</td><th scope="row">Column Filter</th><td>Keep the 17 published columns</td><td class="num">4,599</td><td class="num">17</td></tr>
+              <tr><td class="rank">31</td><th scope="row">Column Renamer</th><td>Short, web-friendly column names</td><td class="num">4,599</td><td class="num">17</td></tr>
+              <tr><td class="rank">19</td><th scope="row">CSV Writer</th><td>Model-level table</td><td class="num">4,599</td><td class="num">17</td></tr>
+              <tr><td class="rank">29 &rarr; 21</td><th scope="row">GroupBy &rarr; CSV Writer</th><td>Per size band: count, min, median, max kWh; median inches</td><td class="num">8</td><td class="num">6</td></tr>
+              <tr><td class="rank">22 &rarr; 23 &rarr; 24</td><th scope="row">Row Filter &rarr; Sorter &rarr; CSV Writer</th><td>64&ndash;66 inch models, cheapest to run first</td><td class="num">830</td><td class="num">17</td></tr>
+              <tr><td class="rank">30 &rarr; 26</td><th scope="row">GroupBy &rarr; CSV Writer</th><td>Per brand: count and medians</td><td class="num">74</td><td class="num">6</td></tr>
+              <tr><td class="rank">27</td><th scope="row">Statistics</th><td>Profiles the <em>raw</em> input; feeds nothing, kept as audit evidence</td><td class="num">&mdash;</td><td class="num">&mdash;</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 style="margin-top:var(--sp-6)">Derived attributes</h3>
+        <div class="grid grid--3">
+          <div class="card">
+            <span class="card__tag">inches</span>
+            <p class="small muted" style="margin:0"><code>screensize / 2.54</code>, rounded. Converts the
+            published centimetre diagonal into the unit the product is actually sold in.</p>
+          </div>
+          <div class="card">
+            <span class="card__tag">kwh_per_m&sup2;</span>
+            <p class="small muted" style="margin:0">Energy per square metre of panel. Lets brands be
+            compared without rewarding those that mostly sell small sets.</p>
+          </div>
+          <div class="card">
+            <span class="card__tag">cost_aud_year</span>
+            <p class="small muted" style="margin:0">kWh &times; tariff. The only figure on this site that
+            uses an assumption rather than a measurement, so it is exposed as a slider.</p>
+          </div>
+        </div>
+
+        <div class="callout" style="margin-top:var(--sp-5)">
+          <p class="small" style="margin:0">
+            <b>How the site&rsquo;s files are produced.</b> <code>knime/pipeline_reference.py</code>
+            repeats every KNIME step in Python and adds the final shaping the charts need: tidy names
+            for the aggregate columns, the spread and cost columns for Act four, the star &times; band
+            pivot for the heat map, the 25-model cut for brands, and <code>key_facts.csv</code>. Its
+            output in <code>data/out/</code> is what the site loads. KNIME&rsquo;s own writer output is
+            kept, unedited, in <code>data/knime_out/</code> and checked against it by
+            <code>knime/verify_knime_outputs.py</code>: all 4,599 models, 8 bands, 830 65-inch models
+            and 22 brands match value for value, with three explained exceptions.
+            <code>cost_aud_year</code> is $1 lower for 43 models, because KNIME multiplies by the
+            floating-point 0.35 where the script computes &times;35&divide;100; 106
+            <code>unknown</code> tuner values are left as text rather than recoded to missing; and one
+            JVC model registered with the model number <code>NA</code> keeps that text in KNIME but
+            is read as missing by pandas. None of the three reaches a chart.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ LIMITATIONS ============ -->
+    <section class="section section--tint">
+      <div class="wrap">
+        <h2>4. What this data cannot tell you</h2>
+        <p class="lede" style="max-width:var(--maxw-text)">
+          Being honest about the edges of a dataset is part of presenting it. Five limits apply to
+          every chart on this site.
+        </p>
+
+        <div class="grid grid--2">
+          <div class="card">
+            <h3>It is a lab figure, not your bill</h3>
+            <p class="small muted">The kWh/year value is measured under one prescribed test with a
+            fixed picture setting and 10 hours of use a day. It is excellent for <em>comparing</em>
+            models on equal terms and only approximate for <em>predicting</em> a household's actual
+            consumption.</p>
+          </div>
+          <div class="card">
+            <h3>Registered is not the same as stocked</h3>
+            <p class="small muted">A registration means a model may legally be sold, not that any
+            retailer carries it. Some registrations are years old, which is why a 2017 commercial
+            panel can appear alongside current models. Availability is self-reported by the supplier.</p>
+          </div>
+          <div class="card">
+            <h3>No sales weighting</h3>
+            <p class="small muted">Every model counts once, whether it sold a million units or none.
+            A median across models is not a median across televisions in Australian homes, and this
+            data cannot be used to estimate national consumption.</p>
+          </div>
+          <div class="card">
+            <h3>Supplier-reported test results</h3>
+            <p class="small muted">Figures are submitted by the registrant under the scheme's test
+            standard, with regulatory check-testing rather than independent testing of every model.
+            Believability rests on the compliance regime.</p>
+          </div>
+          <div class="card">
+            <h3>The tariff is an assumption</h3>
+            <p class="small muted">35&nbsp;c/kWh is a national-average figure; real rates vary by
+            state, retailer and time of use. No conclusion on this site depends on it &mdash; the
+            energy ranking is identical at any price, and the slider lets you substitute your own.</p>
+          </div>
+          <div class="card">
+            <h3>Standby is excluded</h3>
+            <p class="small muted">Standby power is in the file but missing for 854 rows, so it is
+            left out of every chart and headline figure rather than imputed.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FILES ============ -->
+    <section class="section">
+      <div class="wrap">
+        <h2>5. Files in this project</h2>
+        <div class="table-wrap">
+          <table>
+            <caption>Every data file, and what uses it. Files in <code>data/out/</code> are written by
+            the reference script; files in <code>data/knime_out/</code> by the KNIME workflow.</caption>
+            <thead>
+              <tr><th scope="col">File</th><th scope="col" class="num">Rows</th><th scope="col">Used by</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row"><code>data/raw/tv_2026_10_04.csv</code></th><td class="num">5,030</td><td>Untouched source, kept for audit</td></tr>
+              <tr><th scope="row"><code>data/out/tv_clean.csv</code></th><td class="num">4,599</td><td>Act one scatter, the explorer, the model table</td></tr>
+              <tr><th scope="row"><code>data/out/shelf_65.csv</code></th><td class="num">830</td><td>Act two beeswarm</td></tr>
+              <tr><th scope="row"><code>data/out/star_band_heat.csv</code></th><td class="num">50</td><td>Act three heat map</td></tr>
+              <tr><th scope="row"><code>data/out/band_summary.csv</code></th><td class="num">8</td><td>Act four cost ranges</td></tr>
+              <tr><th scope="row"><code>data/out/brand_efficiency.csv</code></th><td class="num">22</td><td>Brand ranking for the write-up; the Explore chart recomputes it live from <code>tv_clean.csv</code> so it can follow the filters</td></tr>
+              <tr><th scope="row"><code>data/out/tech_at_65.csv</code></th><td class="num">3</td><td>LCD vs OLED at 65 inches &mdash; checked, then cut from the story as too small a difference</td></tr>
+              <tr><th scope="row"><code>data/out/key_facts.csv</code></th><td class="num">1</td><td>Every number quoted in the prose</td></tr>
+              <tr><th scope="row"><code>data/knime_out/*.csv</code></th><td class="num">4 files</td><td>KNIME&rsquo;s own outputs, unedited &mdash; the evidence that the workflow reproduces <code>data/out/</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="site-footer__top">
+        <img src="assets/img/PowerIcon.png" alt="">
+        <strong>The Price of a Bigger Picture</strong>
+      </div>
+      <p class="small">
+        Data: <a href="https://data.gov.au/data/dataset/energy-rating-for-household-appliances">Energy
+        Rating data for household appliances</a>, Department of Climate Change, Energy, the
+        Environment and Water, via data.gov.au. Licensed CC BY 4.0.
+      </p>
+      <p class="small">&copy; <span data-year>2026</span> Tri Tran &middot; COS30045 Data Visualisation, Swinburne University of Technology.</p>
+      <p class="site-footer__ack">
+        <b>Generative AI acknowledgement:</b> Claude (Anthropic) was used to assist with data
+        exploration, the KNIME workflow design, the D3 chart code and the drafting of this page. All
+        figures were recomputed from the source dataset and verified by the author, who takes
+        responsibility for the final submission. See the <a href="about.html">About</a> page for the
+        full declaration.
+      </p>
+    </div>
+  </footer>
+
+  <script src="assets/js/vendor/d3.v7.min.js"></script>
+  <script src="assets/js/charts.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

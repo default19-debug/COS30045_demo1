@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en-AU" class="no-js">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About this project</title>
+  <meta name="description" content="Who this data story is for, what it is trying to achieve, the design decisions behind it, and the generative AI declaration.">
+  <link rel="icon" href="assets/img/PowerIcon.png" type="image/png">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="brand" href="index.html" aria-label="The Price of a Bigger Picture, home">
+          <img class="brand__mark" src="assets/img/PowerIcon.png" alt="">
+          <span class="brand__text">
+            <b>The Price of a Bigger Picture</b>
+            <span class="brand__tag">Television energy use in Australia</span>
+          </span>
+        </a>
+        <ul class="nav__list">
+          <li><a class="nav__link" href="index.html">Story</a></li>
+          <li><a class="nav__link" href="explore.html">Explore</a></li>
+          <li><a class="nav__link" href="data.html">Data &amp; method</a></li>
+          <li><a class="nav__link is-active" href="about.html" aria-current="page">About</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Switch theme">&#9790;</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" style="padding-block: var(--sp-6)">
+      <div class="wrap">
+        <p class="hero__kicker">About</p>
+        <h1 style="font-size: var(--fs-2xl); max-width: 30ch">Why this project exists</h1>
+        <p class="hero__standfirst">
+          A COS30045 Data Visualisation project at Swinburne University of Technology, built on the
+          Australian Government's public register of television energy performance.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ PURPOSE ============ -->
+    <section class="section">
+      <div class="wrap wrap--text stack">
+        <span class="eyebrow">Purpose</span>
+        <h2>The one sentence this site exists to deliver</h2>
+
+        <div class="takeaway" style="max-width:none">
+          Australians comparing televisions are shown a star rating that cannot be compared across
+          screen sizes, so the number that actually predicts the bill &mdash; kilowatt hours per
+          year, printed on the same label &mdash; is the one they should be reading.
+        </div>
+
+        <p>
+          That is the project's Big Idea in Duarte's sense: a single complete sentence that states a
+          point of view and says what is at stake. Everything on the Story page is built to deliver
+          it, and anything that did not advance it was cut.
+        </p>
+
+        <h3>Who it is for</h3>
+        <p>
+          The primary audience is an <b>Australian household about to buy a television</b> &mdash;
+          non-expert, not especially interested in energy policy, making a decision in a shop or a
+          browser tab within the next few weeks. They are numerate enough to read a chart but have
+          no reason to care about kilowatt hours as such. They care about dollars.
+        </p>
+        <p>
+          That audience dictated three things. Energy is always converted to money. The star rating
+          is treated as the thing they already trust, so the story works by complicating it rather
+          than dismissing it. And the call to action is a single behaviour that is free and takes
+          five seconds: read the number under the stars.
+        </p>
+        <p>
+          A secondary audience &mdash; a tutor, or anyone checking the work &mdash; is served by the
+          <a href="data.html">Data &amp; method</a> page rather than by cluttering the story with
+          caveats.
+        </p>
+
+        <h3>What the audience should do</h3>
+        <p>
+          Compare within a screen size, not across sizes, and use the kWh/year figure to do it.
+          The <a href="explore.html">explorer</a> exists to make that one action easy, and it points
+          onward to the government's own
+          <a href="https://reg.energyrating.gov.au/comparator/" rel="external">product comparator</a>
+          for checking a specific model before purchase.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ STORY SHAPE ============ -->
+    <section class="section section--tint">
+      <div class="wrap">
+        <span class="eyebrow">Narrative</span>
+        <h2>How the story is built</h2>
+        <p class="lede" style="max-width:var(--maxw-text)">
+          The Story page follows the three-part structure from the unit: a setting the audience
+          already accepts, a conflict that unsettles it, and a resolution that asks for one action.
+        </p>
+
+        <div class="grid grid--2" style="margin-top:var(--sp-5)">
+          <div class="card">
+            <span class="card__tag">Setting &middot; Act one</span>
+            <h3>Agree with the reader</h3>
+            <p class="small muted">Bigger screens use more power. Confirmed with every model in the
+            register, r&nbsp;=&nbsp;0.88. Establishes credibility before anything is challenged, and
+            plants the detail that will matter: each vertical slice is tall.</p>
+          </div>
+          <div class="card">
+            <span class="card__tag">Conflict &middot; Act two</span>
+            <h3>Show the gap they cannot see</h3>
+            <p class="small muted">Hold screen size constant at 65 inches. 830 models, and the middle
+            80% still span $126 to $228 a year. The decision they thought they had made turns out
+            not to be the one that matters.</p>
+          </div>
+          <div class="card">
+            <span class="card__tag">Conflict deepens &middot; Act three</span>
+            <h3>Remove the tool they trusted</h3>
+            <p class="small muted">The star rating is size-relative, so the same five stars means
+            124 kWh on a 32-inch and 988 on an 86-inch. The reader now has a problem and no
+            instrument.</p>
+          </div>
+          <div class="card">
+            <span class="card__tag">Resolution &middot; Act four</span>
+            <h3>Hand back a better instrument</h3>
+            <p class="small muted">Costs in dollars at the reader's own tariff, then three concrete
+            steps. The kWh figure does everything the stars could not, and it is already printed on
+            the label.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ DESIGN ============ -->
+    <section class="section">
+      <div class="wrap">
+        <span class="eyebrow">Design decisions</span>
+        <h2>Why the charts look like this</h2>
+
+        <div class="grid grid--2" style="align-items:start">
+          <div class="stack">
+            <h3>Marks and channels</h3>
+            <p class="small muted">
+              Quantities are carried by position on a common scale wherever possible, which is the
+              most accurately perceived channel (Munzner). Colour is used for one categorical
+              attribute at a time, or as a redundant encoding of a quantity that is also printed as
+              a number. No quantity is encoded by area or angle alone, and there are no 3D charts
+              and no pie charts anywhere on the site.
+            </p>
+
+            <h3>Borrowing the label's colours</h3>
+            <p class="small muted">
+              The sequential ramp is the Australian Energy Rating Label's own green-to-red scale. A
+              reader who has seen the sticker in a shop already knows which end is good, so the
+              encoding needs no explanation &mdash; and the heat map and the cost bars agree with the
+              product they describe.
+            </p>
+
+            <h3>Graphical integrity</h3>
+            <p class="small muted">
+              Bars begin at zero. Axes are not truncated and no data is clipped out of a chart to
+              tidy it up. Where a headline figure would have been flattered by the extremes &mdash;
+              the 6.1&times; spread at 65 inches &mdash; the middle 80% is reported alongside it and
+              the two outliers are labelled for what they are. Heat map cells backed by fewer than
+              three models are left blank rather than drawn from a single product.
+            </p>
+          </div>
+
+          <div class="stack">
+            <h3>One honest distortion, declared</h3>
+            <p class="small muted">
+              The heat map's colour ramp is spread non-linearly across its range. Energy data is
+              strongly right-skewed, and a linear ramp painted four fifths of the grid the same
+              green. The scale stays continuous and monotonic &mdash; higher always reads redder
+              &mdash; and the exact value is printed in every cell, so the colour never has to be
+              measured. This is noted here because an undeclared non-linear colour scale would be
+              exactly the kind of thing the unit teaches you to catch.
+            </p>
+
+            <h3>Data-ink</h3>
+            <p class="small muted">
+              Gridlines are faint and dashed, redundant axis spines are removed, values are labelled
+              directly rather than forcing a reader to measure against an axis, and no chart carries
+              a border, background fill or decorative element that does not encode something.
+            </p>
+
+            <h3>Accessibility</h3>
+            <p class="small muted">
+              Every chart carries a title and a text description for screen readers. Colour is never
+              the only carrier of meaning. The categorical palette is colour-blind safe. All
+              controls are keyboard reachable with visible focus, touch targets meet 44&nbsp;px, and
+              animation is disabled entirely under <code>prefers-reduced-motion</code>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BUILD ============ -->
+    <section class="section section--tint">
+      <div class="wrap">
+        <span class="eyebrow">Build</span>
+        <h2>How it was made</h2>
+        <div class="grid grid--3">
+          <div class="card">
+            <span class="card__tag">Data processing</span>
+            <p class="small muted" style="margin:0">KNIME Analytics Platform. 29 nodes &mdash; a
+            cleaning chain, three output branches and a profiling branch &mdash; documented on the
+            <a href="data.html">Data &amp; method</a> page with row counts at every stage.</p>
+          </div>
+          <div class="card">
+            <span class="card__tag">Visualisation</span>
+            <p class="small muted" style="margin:0">D3.js v7, hand-built SVG. Scales, axes, data
+            binding with <code>.data().join()</code>, transitions and tooltips written from
+            scratch &mdash; no charting library.</p>
+          </div>
+          <div class="card">
+            <span class="card__tag">Front end</span>
+            <p class="small muted" style="margin:0">Hand-written HTML and CSS. No framework, no build
+            step. System fonts only, so the site renders identically offline.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ GENAI ============ -->
+    <section class="section">
+      <div class="wrap wrap--text stack">
+        <span class="eyebrow">Declaration</span>
+        <h2>Generative AI use</h2>
+
+        <p>
+          Generative AI (Claude, by Anthropic) was used in the production of this project. This
+          declaration records what it did and what it did not do.
+        </p>
+
+        <h3>Where it was used</h3>
+        <ul class="tick-list">
+          <li>Profiling the raw dataset to surface the data quality issues listed on the Data &amp;
+              method page.</li>
+          <li>Designing the KNIME node sequence and writing the reference script that mirrors it.</li>
+          <li>Generating a first draft of the KNIME workflow file. That draft did not load cleanly;
+              the author debugged it and rebuilt the broken nodes by hand in KNIME, and the submitted
+              workflow is the hand-repaired version.</li>
+          <li>Checking the KNIME outputs against the reference script, value by value.</li>
+          <li>Writing the D3 chart code, the CSS design system and the page markup.</li>
+          <li>Drafting and editing the written copy on all four pages.</li>
+        </ul>
+
+        <h3>Where it was not used</h3>
+        <ul class="tick-list">
+          <li>No data was generated, estimated, imputed or invented. Every figure traces to the
+              source file.</li>
+          <li>The choice of story, audience and argument was the author's.</li>
+          <li>No AI-generated text was accepted without checking the number behind it.</li>
+        </ul>
+
+        <h3>Verification</h3>
+        <p>
+          Every quantity quoted in the prose was recomputed from the source dataset and cross-checked
+          against the generated CSVs. The author reviewed, tested and modified all code, and takes
+          full responsibility for the accuracy of the final submission.
+        </p>
+
+        <h3 style="margin-top:var(--sp-5)">References</h3>
+        <ul class="small muted" style="padding-left:1.2em">
+          <li>Department of Climate Change, Energy, the Environment and Water (2026).
+              <em>Energy Rating data for household appliances &mdash; Labelled products.</em> data.gov.au. CC BY 4.0.</li>
+          <li>Han, J., Kamber, M. &amp; Pei, J. (2011). <em>Data Mining: Concepts and Techniques</em> (3rd ed.). Ch. 2&ndash;3.</li>
+          <li>Knaflic, C. N. (2015). <em>Storytelling with Data.</em> Ch. 1&ndash;2.</li>
+          <li>Munzner, T. (2014). <em>Visualization Analysis and Design.</em> Ch. 5&ndash;6.</li>
+          <li>Tufte, E. R. (2001). <em>The Visual Display of Quantitative Information</em> (2nd ed.).</li>
+          <li>Dufour, A. &amp; Meeks, E. (2024). <em>D3.js in Action</em> (3rd ed.). Ch. 2&ndash;3.</li>
+          <li>Jarmul, K. (2023). <em>Practical Data Privacy.</em> Ch. 1.</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="site-footer__top">
+        <img src="assets/img/PowerIcon.png" alt="">
+        <strong>The Price of a Bigger Picture</strong>
+      </div>
+      <p class="small">
+        Data: <a href="https://data.gov.au/data/dataset/energy-rating-for-household-appliances">Energy
+        Rating data for household appliances</a>, Department of Climate Change, Energy, the
+        Environment and Water, via data.gov.au. Licensed CC BY 4.0.
+      </p>
+      <p class="small">&copy; <span data-year>2026</span> Tri Tran &middot; COS30045 Data Visualisation, Swinburne University of Technology.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/vendor/d3.v7.min.js"></script>
+  <script src="assets/js/charts.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

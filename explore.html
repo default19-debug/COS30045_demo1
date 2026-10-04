@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en-AU" class="no-js">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore the register</title>
+  <meta name="description" content="Filter all 4,599 televisions registered for sale in Australia by size, panel type and brand, and price any model at your own electricity tariff.">
+  <link rel="icon" href="assets/img/PowerIcon.png" type="image/png">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="brand" href="index.html" aria-label="The Price of a Bigger Picture, home">
+          <img class="brand__mark" src="assets/img/PowerIcon.png" alt="">
+          <span class="brand__text">
+            <b>The Price of a Bigger Picture</b>
+            <span class="brand__tag">Television energy use in Australia</span>
+          </span>
+        </a>
+        <ul class="nav__list">
+          <li><a class="nav__link" href="index.html">Story</a></li>
+          <li><a class="nav__link is-active" href="explore.html" aria-current="page">Explore</a></li>
+          <li><a class="nav__link" href="data.html">Data &amp; method</a></li>
+          <li><a class="nav__link" href="about.html">About</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Switch theme">&#9790;</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" style="padding-block: var(--sp-6)">
+      <div class="wrap">
+        <p class="hero__kicker">Explorer</p>
+        <h1 style="font-size: var(--fs-2xl); max-width: 32ch">Find your television in the register</h1>
+        <p class="hero__standfirst" style="margin-bottom: var(--sp-3)">
+          All <span id="total-count">4,599</span> models currently registered for sale in Australia.
+          Filter them, then click any row to see what that exact model costs to run on your tariff
+          &mdash; and how it compares with other televisions the same size.
+        </p>
+        <div class="hero__meta" data-d3-provenance
+             data-file="tv_2026_10_04.csv"
+             data-models="4,599"
+             data-retrieved="4 October 2026"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+
+        <!-- ============ FILTERS ============ -->
+        <h2 style="font-size: var(--fs-xl)">Filters</h2>
+
+        <div class="controls" style="flex-direction: column; align-items: stretch; gap: var(--sp-4)">
+          <div class="control" style="min-width:0">
+            <span class="control__label" id="lbl-band">Screen size</span>
+            <div class="chips" id="chips-band" role="group" aria-labelledby="lbl-band"></div>
+          </div>
+
+          <div class="control" style="min-width:0">
+            <span class="control__label" id="lbl-tech">Panel technology</span>
+            <div class="chips" id="chips-tech" role="group" aria-labelledby="lbl-tech"></div>
+          </div>
+
+          <div style="display:flex; flex-wrap:wrap; gap:var(--sp-4); align-items:flex-end">
+            <div class="control">
+              <label class="control__label" for="brand-select">Brand</label>
+              <select id="brand-select"></select>
+            </div>
+
+            <div class="control">
+              <label class="control__label" for="model-search">Search brand or model</label>
+              <input type="search" id="model-search" placeholder="e.g. QA65 or Hisense" autocomplete="off">
+            </div>
+
+            <div class="control">
+              <label class="control__label" for="x-price">
+                Price &mdash; <span class="control__val" id="x-price-out">35c</span>/kWh
+              </label>
+              <input type="range" id="x-price" min="15" max="60" step="1" value="35">
+            </div>
+
+            <div class="control">
+              <label class="control__label" for="x-hours">
+                Viewing &mdash; <span class="control__val" id="x-hours-out">10 h</span>/day
+              </label>
+              <input type="range" id="x-hours" min="1" max="16" step="1" value="10">
+            </div>
+
+            <button class="btn btn--ghost" type="button" id="reset-filters">Reset filters</button>
+          </div>
+        </div>
+
+        <p class="small muted">
+          <b><span id="match-count">0</span></b> models match the current filters.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ BRAND CHART ============ -->
+    <section class="section section--tint">
+      <div class="wrap">
+        <figure class="figure">
+          <div class="figure__head">
+            <p class="figure__title">Which brands build the most efficient panels?</p>
+            <p class="figure__sub">
+              Median kilowatt hours per year <em>per square metre of screen</em>, so brands that
+              mostly sell small sets are not flattered by their size mix. Responds to the filters above.
+            </p>
+          </div>
+          <div class="responsive-svg-container" id="chart-brands"></div>
+          <figcaption class="figure__note">
+            Brands with fewer than eight matching models are left out, because a median over a
+            handful of products says more about which products were registered than about the brand.
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ TABLE + PICKED MODEL ============ -->
+    <section class="section">
+      <div class="wrap">
+        <div class="grid" style="grid-template-columns: minmax(0, 1.6fr) minmax(260px, 1fr); align-items:start">
+
+          <div>
+            <h2 style="font-size: var(--fs-xl)">Matching models</h2>
+            <p class="small muted" id="table-count">Loading&hellip;</p>
+            <div class="table-wrap" style="max-height: 560px; overflow-y: auto">
+              <table>
+                <caption>Click a column heading to sort, or a row to price that model.</caption>
+                <thead><tr id="table-head"></tr></thead>
+                <tbody id="table-body"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <aside class="card" style="position: sticky; top: 80px">
+            <span class="card__tag">Your television</span>
+            <div id="picked">
+              <p class="muted small" style="margin:0">
+                Pick a model from the table to see what it costs to run, and how it compares with
+                other televisions of the same size.
+              </p>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ HOW TO READ IT ============ -->
+    <section class="section section--tint">
+      <div class="wrap wrap--text">
+        <span class="eyebrow">How to use this</span>
+        <h2>Comparing honestly</h2>
+        <p>
+          The one rule that makes this data useful: <b>compare within a screen size, not
+          across</b>. Filter to the size you have already decided on, sort by kWh/yr, and the
+          cheapest television to run is at the top. That comparison is valid. Sorting the whole
+          register by kWh and buying the top result just tells you to buy a small television.
+        </p>
+        <p>
+          The official consumer version of this tool is the government's own
+          <a href="https://reg.energyrating.gov.au/comparator/" rel="external">Energy Rating product
+          comparator</a>, which searches the same registration database. It is the authoritative
+          place to check a specific model before you buy.
+        </p>
+        <div class="callout">
+          <p style="margin:0" class="small">
+            <b>A caveat worth keeping:</b> the kWh/year figure is a laboratory measurement taken
+            under one standard test, with a fixed picture setting and a fixed 10 hours a day. Your
+            own consumption depends on brightness, picture mode and what you actually watch. The
+            figure is excellent for <em>comparing</em> models and only approximate for
+            <em>predicting</em> your bill.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="site-footer__top">
+        <img src="assets/img/PowerIcon.png" alt="">
+        <strong>The Price of a Bigger Picture</strong>
+      </div>
+      <p class="small">
+        Data: <a href="https://data.gov.au/data/dataset/energy-rating-for-household-appliances">Energy
+        Rating data for household appliances</a>, Department of Climate Change, Energy, the
+        Environment and Water, via data.gov.au. Licensed CC BY 4.0.
+      </p>
+      <p class="small">&copy; <span data-year>2026</span> Tri Tran &middot; COS30045 Data Visualisation, Swinburne University of Technology.</p>
+      <p class="site-footer__ack">
+        <b>Generative AI acknowledgement:</b> Claude (Anthropic) was used to assist with data
+        exploration, the KNIME workflow design, the D3 chart code and the drafting of this page. All
+        figures were recomputed from the source dataset and verified by the author, who takes
+        responsibility for the final submission. See the <a href="about.html">About</a> page for the
+        full declaration.
+      </p>
+    </div>
+  </footer>
+
+  <script src="assets/js/vendor/d3.v7.min.js"></script>
+  <script src="assets/js/charts.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/explore.js"></script>
+</body>
+</html>

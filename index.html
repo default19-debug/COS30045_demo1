@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en-AU" class="no-js">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Price of a Bigger Picture</title>
+  <meta name="description" content="Every television legally sold in Australia is registered with its tested energy use. All 4,599 of them, and what the star rating does not tell you.">
+  <link rel="icon" href="assets/img/PowerIcon.png" type="image/png">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="brand" href="index.html" aria-label="The Price of a Bigger Picture, home">
+          <img class="brand__mark" src="assets/img/PowerIcon.png" alt="">
+          <span class="brand__text">
+            <b>The Price of a Bigger Picture</b>
+            <span class="brand__tag">Television energy use in Australia</span>
+          </span>
+        </a>
+        <ul class="nav__list">
+          <li><a class="nav__link is-active" href="index.html" aria-current="page">Story</a></li>
+          <li><a class="nav__link" href="explore.html">Explore</a></li>
+          <li><a class="nav__link" href="data.html">Data &amp; method</a></li>
+          <li><a class="nav__link" href="about.html">About</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Switch theme">&#9790;</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ================= HERO ================= -->
+    <section class="hero">
+      <div class="wrap">
+        <p class="hero__kicker">Data story &middot; COS30045</p>
+        <h1>A bigger screen costs more to run. That is not the decision that costs you money.</h1>
+        <p class="hero__standfirst">
+          Every television that can legally be sold in Australia is registered with the government,
+          with its energy use measured under one standard test. That register is public. It contains
+          <b>4,599 models</b> currently on the market &mdash; and it shows that two televisions of the
+          same size, sitting on the same shelf, can differ by more than $100 a year to run.
+        </p>
+
+        <div class="stats">
+          <div class="stat">
+            <span class="stat__num" data-count="4599">4,599</span>
+            <span class="stat__label">Models on sale</span>
+          </div>
+          <div class="stat">
+            <span class="stat__num" data-count="74">74</span>
+            <span class="stat__label">Brands</span>
+          </div>
+          <div class="stat">
+            <span class="stat__num" data-count="830">830</span>
+            <span class="stat__label">Choices at 65&quot;</span>
+          </div>
+          <div class="stat">
+            <span class="stat__num" data-count="8" data-count-suffix="&times;">8&times;</span>
+            <span class="stat__label">Energy gap at the same star rating</span>
+          </div>
+        </div>
+
+        <!-- D3 writes the provenance line and the colour-ramp swatch (Ex 4.2) -->
+        <div class="hero__meta" data-d3-provenance
+             data-file="tv_2026_10_04.csv"
+             data-models="4,599"
+             data-retrieved="4 October 2026"></div>
+      </div>
+    </section>
+
+    <!-- ================= ACT 1 ================= -->
+    <section class="beat wrap reveal">
+      <p class="beat__num">Act one</p>
+      <div class="beat__head">
+        <h2>What everybody believes </h2>
+        <p class="beat__lede">
+          Light costs electricity, and a bigger panel has more area to light. 
+          </p>
+          <p>
+          Across all
+          4,599 registered models, screen area explains most of the variation in annual energy use
+          &mdash; the correlation is 0.88, which for consumer-product data is about as tight as
+          relationships get.
+        </p>
+      </div>
+
+      <figure class="figure">
+        <div class="figure__head">
+          <p class="figure__title">Annual energy use rises with screen area</p>
+          <p class="figure__sub">One dot per registered model. Colour shows panel technology. Hover any dot for the model.</p>
+        </div>
+        <div class="responsive-svg-container" id="chart-scatter"></div>
+        <div class="legend" role="list">
+          <span class="legend__item" role="listitem"><span class="legend__swatch" style="background:#4c72b0"></span> LCD (CCFL backlight)</span>
+          <span class="legend__item" role="listitem"><span class="legend__swatch" style="background:#55a868"></span> LCD, LED backlight</span>
+          <span class="legend__item" role="listitem"><span class="legend__swatch" style="background:#c44e52"></span> OLED</span>
+        </div>
+        <figcaption class="figure__note">
+          Energy figures are the <code>Labelled energy consumption (kWh/year)</code> value from the
+          registration database, measured under the GEMS test standard at 10 hours of use per day.
+        </figcaption>
+      </figure>
+
+      <div class="beat__aside">
+        <p>
+          So the advice writes itself: buy a smaller television. Except that nobody shops that way.
+          People decide roughly what size fits the room and the budget, and then choose between the
+          models at that size. Which makes the interesting question not <em>how much does size
+          matter</em> but <em>how much room is left once size is settled</em>.
+        </p>
+      </div>
+    </section>
+
+    <!-- ================= ACT 2 ================= -->
+    <section class="beat wrap reveal">
+      <p class="beat__num">Act two</p>
+      <div class="beat__head">
+        <h2>One size. 830 choices. Nearly double the running cost.</h2>
+        <p class="beat__lede">
+          Sixty-five inches is the most crowded size on the Australian market: 830 registered models.
+          Every dot below is the same screen size. The only thing that varies is which one you carry
+          home.
+        </p>
+      </div>
+
+      <figure class="figure">
+        <div class="figure__head">
+          <p class="figure__title">Every 65-inch television on the Australian market</p>
+          <p class="figure__sub">Dots are placed by annual energy use and coloured on the Energy Rating Label's own scale.</p>
+        </div>
+        <div class="responsive-svg-container" id="chart-shelf"></div>
+        <div class="legend">
+          <span class="legend__ramp">
+            Efficient <span class="legend__ramp-bar"></span> Inefficient
+          </span>
+        </div>
+        <figcaption class="figure__note">
+          The shaded band is the middle 80% of models (10th to 90th percentile). The two labelled
+          tails are genuinely unusual products &mdash; a 2017-era commercial display and an 8K
+          flagship &mdash; and are called out rather than used to headline the finding.
+        </figcaption>
+      </figure>
+
+      <div class="beat__aside">
+        <p>
+          Taking the extremes, the gap is 6.1&times;: 185&nbsp;kWh a year against 1,135. That is a real
+          number but a lazy one, because it compares two products almost nobody is choosing between.
+          The honest figure is the middle of the distribution. <b>Eight out of ten 65-inch models fall
+          between 360 and 652&nbsp;kWh a year</b> &mdash; at 35&nbsp;cents a kilowatt hour, between
+          <b>$126 and $228</b>.
+        </p>
+        <p class="takeaway">
+          A hundred dollars a year, on a television people keep for a decade. <strong>The size
+          decision is made in the showroom; the running-cost decision is made on the spec
+          sheet</strong> &mdash; and almost nobody reads it.
+        </p>
+      </div>
+    </section>
+
+    <!-- ================= ACT 3 ================= -->
+    <section class="beat wrap reveal">
+      <p class="beat__num">Act three</p>
+      <div class="beat__head">
+        <h2>And the label on the box cannot answer the question</h2>
+        <p class="beat__lede">
+          There is a star rating, and it works &mdash; within a screen size. Read a single row of the
+          grid below and the stars do exactly their job: more stars, less electricity, every time.
+          Now read a <em>column</em>.
+        </p>
+      </div>
+
+      <figure class="figure">
+        <div class="figure__head">
+          <p class="figure__title">Median annual energy use, by screen size and star rating</p>
+          <p class="figure__sub">Across a row the stars work. Down a column, the same badge means very different electricity.</p>
+        </div>
+        <div class="responsive-svg-container" id="chart-heat"></div>
+        <div class="legend">
+          <span class="legend__ramp">
+            Low kWh/year <span class="legend__ramp-bar"></span> High kWh/year
+          </span>
+        </div>
+        <figcaption class="figure__note">
+          Cell value is the median of <code>Labelled energy consumption (kWh/year)</code> for that
+          combination. Cells backed by fewer than three models are left blank rather than drawn from
+          a single product.
+        </figcaption>
+      </figure>
+
+      <div class="beat__aside">
+        <p>
+          A five-star 32-inch television uses a median 124&nbsp;kWh a year. A five-star 86-inch
+          television uses 988. <b>Same five stars, eight times the electricity.</b> This is not a
+          defect in the rating &mdash; the Star Rating Index is deliberately calculated relative to
+          screen size, so that a large TV can be judged against other large TVs. But it means the
+          badge is a <em>within-size</em> signal being read by shoppers as an
+          <em>across-the-shop</em> one.
+        </p>
+        <div class="callout callout--warn">
+          <p style="margin:0">
+            <b>The trap:</b> upgrading from a five-star 55-inch to a five-star 75-inch feels like a
+            like-for-like swap. The star count has not changed, so nothing seems to have been given
+            up. The median five-star bill goes from $116 to $205 a year.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= ACT 4 ================= -->
+    <section class="beat wrap reveal">
+      <p class="beat__num">Act four</p>
+      <div class="beat__head">
+        <h2>What it costs, at your tariff and your viewing habits</h2>
+        <p class="beat__lede">
+          Energy figures are abstract; money is not. The chart below converts the register into
+          dollars a year. Both assumptions are yours to change &mdash; the national average is around
+          35&nbsp;cents a kilowatt hour, and the official label assumes 10 hours of viewing a day,
+          which is generous for most households.
+        </p>
+      </div>
+
+      <div class="controls">
+        <div class="control">
+          <label class="control__label" for="price-input">
+            Electricity price &mdash; <span class="control__val" id="price-out">35c</span> per kWh
+          </label>
+          <input type="range" id="price-input" min="15" max="60" step="1" value="35">
+        </div>
+        <div class="control">
+          <label class="control__label" for="hours-input">
+            Viewing &mdash; <span class="control__val" id="hours-out">10 h</span> per day
+          </label>
+          <input type="range" id="hours-input" min="1" max="16" step="1" value="10">
+        </div>
+      </div>
+
+      <figure class="figure">
+        <div class="figure__head">
+          <p class="figure__title">Annual running cost, cheapest to dearest model in each size band</p>
+          <p class="figure__sub">Bar spans the full range on the market. The dark line is the median.</p>
+        </div>
+        <div class="responsive-svg-container" id="chart-cost"></div>
+        <figcaption class="figure__note">
+          Bars begin at $0 so their length is proportional to cost. Notice how far neighbouring
+          bands overlap: a well-chosen 75-inch television can cost less to run than a poorly chosen
+          55-inch one.
+        </figcaption>
+      </figure>
+
+      <div class="beat__aside">
+        <p class="takeaway">
+          That overlap is the whole story. <strong>The bands overlap so heavily that the model you
+          pick matters more than the size you pick</strong> &mdash; which is the opposite of how
+          televisions are sold, and the opposite of what the star rating lets you check.
+        </p>
+      </div>
+    </section>
+
+    <!-- ================= RESOLUTION ================= -->
+    <section class="section section--tint reveal">
+      <div class="wrap wrap--text">
+        <span class="eyebrow">So what should you do</span>
+        <h2>Three things, in order</h2>
+        <ol class="steps">
+          <li>
+            <b>Settle the screen size first, then stop comparing across sizes.</b> Size sets the
+            floor on the bill and nothing you do afterwards undoes it. Once the size is chosen, the
+            star rating becomes genuinely useful.
+          </li>
+          <li>
+            <b>Read the kilowatt-hour number, not the stars.</b> It is printed on the same label,
+            underneath the stars, and unlike the stars it means the same thing on every box in the
+            shop. Lower is cheaper, always, with no asterisk about screen size.
+          </li>
+          <li>
+            <b>Multiply it by your own tariff and your own habits.</b> The label's 10 hours a day is
+            not your household. Use the <a href="explore.html">explorer</a> to find your exact model
+            and put your own numbers in.
+          </li>
+        </ol>
+
+        <p class="muted" style="margin-top:var(--sp-5)">
+          None of this requires trusting us. The register is public, the processing is documented
+          step by step on the <a href="data.html">data and method</a> page, and every figure on this
+          site is recomputed from the source file rather than typed in by hand.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="site-footer__top">
+        <img src="assets/img/PowerIcon.png" alt="">
+        <strong>The Price of a Bigger Picture</strong>
+      </div>
+      <p class="small">
+        Data: <a href="https://data.gov.au/data/dataset/energy-rating-for-household-appliances">Energy
+        Rating data for household appliances</a>, Department of Climate Change, Energy, the
+        Environment and Water, via data.gov.au. Licensed CC BY 4.0.
+      </p>
+      <p class="small">&copy; <span data-year>2026</span> Tri Tran &middot; COS30045 Data Visualisation, Swinburne University of Technology.</p>
+      <p class="site-footer__ack">
+        <b>Generative AI acknowledgement:</b> Claude (Anthropic) was used to assist with data
+        exploration, the KNIME workflow design, the D3 chart code and the drafting of this page. All
+        figures were recomputed from the source dataset and verified by the author, who takes
+        responsibility for the final submission. See the <a href="about.html">About</a> page for the
+        full declaration.
+      </p>
+    </div>
+  </footer>
+
+  <script src="assets/js/vendor/d3.v7.min.js"></script>
+  <script src="assets/js/charts.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/story.js"></script>
+</body>
+</html>
