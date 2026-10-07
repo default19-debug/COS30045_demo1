@@ -175,7 +175,7 @@
       .attr('x', ax).attr('y', ay + 15)
       .attr('text-anchor', 'middle')
       .attr('fill', cssVar('--ink-3'))
-      .text('r = 0.88 · but every vertical slice is tall');
+      .text('but every vertical slice is tall');
   }
 
   /* ======================================================================

@@ -48,7 +48,7 @@ rather than the star count. It costs nothing and takes five seconds in the shop.
 **The story in three minutes.**
 
 > Every TV sold in Australia is registered with the government and energy-tested. I took all 4,599
-> of them. Yes, bigger screens use more power — screen area and energy correlate at r = 0.88. But
+> of them. Yes, bigger screens use more power — that pattern holds across the whole market. But
 > once you have picked a size, the spread between models *at that size* is still large: at 65 inches
 > the middle 80% of models cost between $126 and $228 a year to run. The star rating looks like it
 > should settle that, but it is calculated relative to screen size: a five-star 32-inch uses 124 kWh
@@ -60,7 +60,7 @@ rather than the star count. It costs nothing and takes five seconds in the shop.
 | Figure | Value |
 |---|---|
 | Models on the market | **4,599** (74 brands) |
-| Screen area vs energy | **r = 0.88** (0.877) |
+| Screen area vs energy | r = 0.88 (background only; not quoted on the site) |
 | 65-inch models | **830**, the most crowded size |
 | Middle 80% at 65" (P10–P90) | **360–652 kWh/yr = $126–$228/yr** at 35 c/kWh |
 | Typical gap at 65" | **$102 a year, about $1,000 over ten years** |
@@ -315,7 +315,7 @@ Three findings shaped the angle:
 
 | Act | Role | Claim | Chart |
 |---|---|---|---|
-| One — *What everybody believes* | Setting: agree with the reader | Bigger screens use more energy (r = 0.88) | Scatter, all 4,599 models |
+| One — *What everybody believes* | Setting: agree with the reader | Bigger screens use more energy, across the whole market | Scatter, all 4,599 models |
 | Two — *One size. 830 choices.* | Conflict: show the gap they cannot see | Same size, $126–$228 a year | Beeswarm, every 65" model |
 | Three — *The label cannot answer the question* | Conflict deepens: remove the trusted tool | Five stars = 124 kWh or 988 kWh | Heat map, size × stars |
 | Four — *What it costs, at your tariff* | Resolution: hand back a better instrument | Bands overlap; the model matters more than the size | Range bars with sliders |
@@ -379,6 +379,7 @@ inventory and the cut list. This section records how it evolved.
 | Act one heading → *"What everybody believes"* | Author's edit: shorter, and names the belief the act sets up to complicate |
 | Removed Act one's takeaway paragraph (*"Look again at the chart above and read it vertically instead of diagonally. Every vertical slice is tall. Size sets the floor. It does not set the bill."*) | Delivered **orally** while pointing at the chart — stronger spoken than read |
 | Removed the beeswarm label *"8 in 10 models land in here"* | Delivered **orally** while pointing at the shaded band |
+| Removed *r = 0.88* from Act one's text and chart annotation | The idea — size is the strongest single driver of energy use — is said aloud in plain words instead |
 | Middle-80% figure leads, 6.1× demoted | Integrity (§7) |
 | Heat-map ramp made non-linear | A linear ramp painted four-fifths of the grid the same green; declared on the About page |
 | Beeswarm colour ramp stretched to the shelf's own kWh range | Spread over the whole axis, every dot landed mid-scale and the colour said nothing |
@@ -406,7 +407,8 @@ retrieval date, five label colours) is the Exercise 4.2 D3 work ([§10](#10-how-
   Position on two common scales is the most accurately perceived channel (Munzner), so position
   carries both quantities.
 - *Encoding:* x = screen area (m²), y = kWh/year, colour = panel technology (the one categorical
-  attribute, colour-blind-safe palette). An OLS trend line and *r = 0.88* annotation.
+  attribute, colour-blind-safe palette). An OLS trend line, annotated *Bigger screen, bigger bill — but every vertical slice
+  is tall*.
 - *Story role:* agree with the reader to earn credibility, and plant the detail that matters — every
   vertical slice is tall. A highlighted band at 65" is the hinge: Act two is literally a zoom into
   that column, so the reader never gets lost.
@@ -585,7 +587,7 @@ Standby power is left out of every chart rather than imputed (missing for 854 ro
 | Time | On screen | Say |
 |---|---|---|
 | 0:00 | Hero | "Every TV legally sold in Australia is in a government register — 4,599 models. A bigger screen costs more to run. That's not the decision that costs you money." |
-| 0:25 | Act one scatter | "Size matters — r = 0.88. But read it vertically: every slice is tall. Size sets the floor, not the bill." *(the removed takeaway, spoken)* |
+| 0:25 | Act one scatter | "Size matters: the bigger the screen, the more it uses. But read it vertically: every slice is tall. Size sets the floor, not the bill." *(the removed takeaway, spoken)* |
 | 0:55 | Act two beeswarm | "830 models, all 65 inches. Eight in ten land in this band *(point)* — $126 to $228 a year. The extremes are 6.1× apart, but they're a commercial panel and an 8K flagship, so I lead with the middle." |
 | 1:35 | Act three heat map | "Read a row: stars work. Read a column: five stars is 124 kWh on a 32-inch, 988 on an 86-inch. Same badge, 8× the power." |
 | 2:15 | Act four, drag a slider | "Put in your own tariff. The bands overlap — a good 75-inch can cost less to run than a bad 55." |

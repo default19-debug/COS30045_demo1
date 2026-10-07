@@ -83,7 +83,8 @@ python3 -m pip install pandas && python3 knime/pipeline_reference.py   # regener
 
 ## Findings
 
-- Screen area explains most of the variation in annual energy use (**r = 0.88**).
+- Screen size is the strongest single driver of annual energy use: the bigger the screen, the more
+  power it uses.
 - At a fixed size the spread stays large: among **830** 65-inch models the middle 80% use
   **360–652 kWh/year — $126 to $228 a year** at 35 c/kWh.
 - The star rating is **size-relative**: five stars means a median 124 kWh/year on a 32-inch and

@@ -125,7 +125,8 @@ that needs resolving.
 
 ### Panel 1 — Act One · "What everybody believes"
 **Sees.** Scatter plot, 4,599 dots. Screen area (m²) on x, kWh/year on y, coloured by panel
-technology. An OLS trend line. Annotation: *"Bigger screen, bigger bill — r = 0.88"*. A highlighted
+technology. An OLS trend line. Annotation: *"Bigger screen, bigger bill"* (the planned *r = 0.88* was later removed and the idea
+is said aloud instead). A highlighted
 vertical band at 1.15 m² with a bracket, labelled *"830 models here are all 65 inches — Act two
 zooms into this one column →"*.
 
