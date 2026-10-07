@@ -110,5 +110,5 @@ Generative AI (**Claude**, by Anthropic) was used for data profiling, designing 
 sequence and drafting the first workflow file (debugged and rebuilt by hand by the author), the
 Python reference and verification scripts, the D3, CSS and HTML code, and drafting copy. It was
 **not** used to generate, estimate or impute any data, or to choose the story, audience or argument.
-Every figure was checked against the source data. The full declaration is submitted
-separately, not on the website; a copy is in `WALKTHROUGH.md` §16.
+Every figure was checked against the source data. Each page footer carries a short AI-use
+note; the full declaration is submitted separately, and a copy is in `WALKTHROUGH.md` §16.

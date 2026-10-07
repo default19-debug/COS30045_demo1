@@ -236,8 +236,8 @@ selected model.
 
 ### Panels 7–8 — Data & method, About
 Provenance, the ten-item data-quality log, the KNIME node chain with row counts, five stated
-limitations, and references. (The generative AI declaration is submitted separately, not on the
-site.) These exist so the story page can stay clean: the
+limitations, and references. (Each page footer carries a short AI-use note; the full declaration
+is submitted separately.) These exist so the story page can stay clean: the
 caveats are complete, but they are not in the reader's way.
 
 ---

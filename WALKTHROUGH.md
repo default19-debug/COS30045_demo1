@@ -481,9 +481,9 @@ files are produced and verified, the five limitations, and every data file with 
 
 Purpose and Big Idea, audience and the action asked of them, the narrative structure act by act, the
 design rationale (marks and channels, the label's colours, graphical integrity, the declared
-non-linear ramp, data-ink, accessibility), how it was built, and references. The generative AI
-declaration is deliberately **not** on the website; it is submitted as a separate file (copy in
-§16).
+non-linear ramp, data-ink, accessibility), how it was built, and references. Every page footer
+carries a one-line AI-use note; the full generative AI declaration is submitted as a separate file
+(copy in §16).
 
 ---
 
