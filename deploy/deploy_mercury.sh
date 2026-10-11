@@ -8,7 +8,7 @@
 #   1. checks ~/cos30045/www/htdocs exists (it only does once the account is activated)
 #   2. creates ~/cos30045/www/htdocs/<folder>   - nothing outside that folder is touched,
 #      so the .htaccess in htdocs is never overwritten
-#   3. unpacks the four pages, assets/ and data/out/ into it
+#   3. unpacks the four pages, assets/ and data/knime_out/ into it
 #   4. makes everything readable by Apache (dirs 755, files 644)
 #
 # Before running:
@@ -34,7 +34,7 @@ esac
 cd "$(dirname "$0")/.."
 
 # Exactly what the site needs at runtime. No docs, no KNIME files, no raw data.
-PUBLISH=(index.html explore.html data.html about.html assets data/out)
+PUBLISH=(index.html explore.html data.html about.html assets data/knime_out)
 for f in "${PUBLISH[@]}"; do
   [ -e "$f" ] || { echo "Missing $f - run this from inside the repository."; exit 1; }
 done

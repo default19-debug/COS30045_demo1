@@ -631,18 +631,20 @@
     register('#chart-heat', drawHeat);
     register('#chart-cost', drawCost);
 
+    // [chart, KNIME output file, row parser, optional reshaping]
     const jobs = [
       ['#chart-scatter', 'tv_clean.csv', 'clean'],
       ['#chart-shelf', 'shelf_65.csv', 'shelf'],
-      ['#chart-heat', 'star_band_heat.csv', 'heat'],
+      ['#chart-heat', 'tv_clean.csv', 'clean', VIZ.starBandHeat],
       ['#chart-cost', 'band_summary.csv', 'band']
     ];
 
-    jobs.forEach(([sel, file, parser]) => {
+    jobs.forEach(([sel, file, parser, reshape]) => {
       if (!document.querySelector(sel)) return;
       VIZ.loadingMsg(sel);
 
       VIZ.load(file, parser)
+        .then(rows => reshape ? reshape(rows) : rows)
         .then(rows => {
           const entry = registry.find(r => r.sel === sel);
           entry.data = rows;

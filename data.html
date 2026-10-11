@@ -279,19 +279,22 @@
 
         <div class="callout" style="margin-top:var(--sp-5)">
           <p class="small" style="margin:0">
-            <b>How the site&rsquo;s files are produced.</b> <code>knime/pipeline_reference.py</code>
-            repeats every KNIME step in Python and adds the final shaping the charts need: tidy names
-            for the aggregate columns, the spread and cost columns for Act four, the star &times; band
-            pivot for the heat map, the 25-model cut for brands, and <code>key_facts.csv</code>. Its
-            output in <code>data/out/</code> is what the site loads. KNIME&rsquo;s own writer output is
-            kept, unedited, in <code>data/knime_out/</code> and checked against it by
-            <code>knime/verify_knime_outputs.py</code>: all 4,599 models, 8 bands, 830 65-inch models
-            and 22 brands match value for value, with three explained exceptions.
-            <code>cost_aud_year</code> is $1 lower for 43 models, because KNIME multiplies by the
-            floating-point 0.35 where the script computes &times;35&divide;100; 106
-            <code>unknown</code> tuner values are left as text rather than recoded to missing; and one
-            JVC model registered with the model number <code>NA</code> keeps that text in KNIME but
-            is read as missing by pandas. None of the three reaches a chart.
+            <b>Where the charts get their data.</b> Every chart loads the KNIME workflow&rsquo;s own
+            output in <code>data/knime_out/</code>: the model table from CSV Writer #19 (Act one and
+            the explorer), the 65-inch shelf from #24 (Act two) and the size-band summary from #21
+            (Act four). The workflow has no pivot node, so the Act three heat map is built in the
+            browser from the same model table: models are grouped by size band and whole stars, the
+            median kWh is taken in each cell, and cells with fewer than three models are left out.
+            <code>knime/pipeline_reference.py</code> repeats every step independently in Python into
+            <code>data/out/</code>, and <code>knime/verify_knime_outputs.py</code> checks the two
+            agree: all 4,599 models, 8 bands, 830 65-inch models and 22 brands match value for value,
+            with three explained exceptions. <code>cost_aud_year</code> is $1 lower for 43 models,
+            because KNIME multiplies by the floating-point 0.35 where the script computes
+            &times;35&divide;100; it appears only in tooltips, since every cost in the text and on
+            the sliders is recomputed from kWh. 106 <code>unknown</code> tuner values are left as text
+            rather than recoded to missing, and one JVC model registered with the model number
+            <code>NA</code> keeps that text in KNIME but is read as missing by pandas; neither
+            column is charted.
           </p>
         </div>
       </div>
@@ -353,21 +356,19 @@
         <h2>5. Files in this project</h2>
         <div class="table-wrap">
           <table>
-            <caption>Every data file, and what uses it. Files in <code>data/out/</code> are written by
-            the reference script; files in <code>data/knime_out/</code> by the KNIME workflow.</caption>
+            <caption>Every data file, and what uses it. The site loads <code>data/knime_out/</code>,
+            written by the KNIME workflow; <code>data/out/</code> is the reference script&rsquo;s
+            independent copy, used to verify it.</caption>
             <thead>
               <tr><th scope="col">File</th><th scope="col" class="num">Rows</th><th scope="col">Used by</th></tr>
             </thead>
             <tbody>
               <tr><th scope="row"><code>data/raw/tv_2026_10_04.csv</code></th><td class="num">5,030</td><td>Untouched source, kept for audit</td></tr>
-              <tr><th scope="row"><code>data/out/tv_clean.csv</code></th><td class="num">4,599</td><td>Act one scatter, the explorer, the model table</td></tr>
-              <tr><th scope="row"><code>data/out/shelf_65.csv</code></th><td class="num">830</td><td>Act two beeswarm</td></tr>
-              <tr><th scope="row"><code>data/out/star_band_heat.csv</code></th><td class="num">50</td><td>Act three heat map</td></tr>
-              <tr><th scope="row"><code>data/out/band_summary.csv</code></th><td class="num">8</td><td>Act four cost ranges</td></tr>
-              <tr><th scope="row"><code>data/out/brand_efficiency.csv</code></th><td class="num">22</td><td>Brand ranking for the write-up; the Explore chart recomputes it live from <code>tv_clean.csv</code> so it can follow the filters</td></tr>
-              <tr><th scope="row"><code>data/out/tech_at_65.csv</code></th><td class="num">3</td><td>LCD vs OLED at 65 inches &mdash; checked, then cut from the story as too small a difference</td></tr>
-              <tr><th scope="row"><code>data/out/key_facts.csv</code></th><td class="num">1</td><td>Every number quoted in the prose</td></tr>
-              <tr><th scope="row"><code>data/knime_out/*.csv</code></th><td class="num">4 files</td><td>KNIME&rsquo;s own outputs, unedited &mdash; the evidence that the workflow reproduces <code>data/out/</code></td></tr>
+              <tr><th scope="row"><code>data/knime_out/tv_clean.csv</code></th><td class="num">4,599</td><td>CSV Writer #19 &mdash; Act one scatter, Act three heat map (grouped in the browser), the explorer, the model table</td></tr>
+              <tr><th scope="row"><code>data/knime_out/shelf_65.csv</code></th><td class="num">830</td><td>CSV Writer #24 &mdash; Act two beeswarm</td></tr>
+              <tr><th scope="row"><code>data/knime_out/band_summary.csv</code></th><td class="num">8</td><td>CSV Writer #21 &mdash; Act four cost ranges</td></tr>
+              <tr><th scope="row"><code>data/knime_out/brand_efficiency.csv</code></th><td class="num">74</td><td>CSV Writer #26 &mdash; brand ranking for the write-up; the Explore chart recomputes it live from <code>tv_clean.csv</code> so it can follow the filters</td></tr>
+              <tr><th scope="row"><code>data/out/*.csv</code></th><td class="num">7 files</td><td>The reference script&rsquo;s copy, for verification, plus <code>key_facts.csv</code> (every number quoted in the prose), <code>star_band_heat.csv</code> (the heat-map grid the browser must reproduce) and <code>tech_at_65.csv</code> (LCD vs OLED at 65 inches &mdash; checked, then cut as too small a difference)</td></tr>
             </tbody>
           </table>
         </div>

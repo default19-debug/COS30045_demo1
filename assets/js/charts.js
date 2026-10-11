@@ -15,7 +15,8 @@ const VIZ = (() => {
   const DEFAULT_PRICE = 35;          // cents per kWh
   const LABEL_HOURS = 10;            // hours/day assumed by the GEMS label
 
-  const DATA = 'data/out/';
+  // The CSV Writers of knime/TV_Energy_TriTran.knwf write here (#19, #21, #24, #26).
+  const DATA = 'data/knime_out/';
 
   /* --- Formats ----------------------------------------------------------- */
 
@@ -242,22 +243,17 @@ const VIZ = (() => {
       band: d.size_band,
       country: d.Country
     }),
+    // KNIME GroupBy #29 names its columns "Method(column)"; the starred ones
+    // (Count*, Min*, Max*) are KNIME's own spelling, not footnotes.
     band: d => ({
       band: d.size_band,
-      models: +d.models,
-      min: +d.kwh_min,
-      median: +d.kwh_median,
-      max: +d.kwh_max,
-      inches: +d.median_inches,
-      spread: +d.kwh_spread,
-      ratio: +d.spread_ratio
-    }),
-    heat: d => ({
-      band: d.size_band,
-      stars: +d.stars,
-      kwh: +d.kwh_median,
-      models: +d.models,
-      cost: +d.cost_aud_year
+      models: +d['Count*(kwh_year)'],
+      min: +d['Min*(kwh_year)'],
+      median: +d['Median(kwh_year)'],
+      max: +d['Max*(kwh_year)'],
+      inches: +d['Median(inches)'],
+      spread: d['Max*(kwh_year)'] - d['Min*(kwh_year)'],
+      ratio: Math.round((d['Max*(kwh_year)'] / d['Min*(kwh_year)']) * 10) / 10
     }),
     shelf: d => ({
       brand: d.Brand,
@@ -270,18 +266,44 @@ const VIZ = (() => {
       star: +d.star_rating,
       wPerM2: +d.watts_per_m2
     }),
+    // KNIME GroupBy #30.
     brand: d => ({
       brand: d.Brand,
-      models: +d.models,
-      kwh: +d.kwh_median,
-      inches: +d.median_inches,
-      kwhPerM2: +d.kwh_per_m2_median,
-      star: +d.star_median
+      models: +d['Count*(kwh_year)'],
+      kwh: +d['Median(kwh_year)'],
+      inches: +d['Median(inches)'],
+      kwhPerM2: +d['Median(kwh_per_m2)'],
+      star: +d['Median(star_rating)']
     })
   };
 
+  // Fetch and parse each file only once, however many charts ask for it.
+  const cache = new Map();
+
   function load(file, parser) {
-    return d3.csv(DATA + file, rowParsers[parser]);
+    const key = file + '|' + parser;
+    if (!cache.has(key)) cache.set(key, d3.csv(DATA + file, rowParsers[parser]));
+    return cache.get(key);
+  }
+
+  /**
+   * Act three's grid, built from the model rows because the workflow has no
+   * pivot node: every (size_band, stars) pair from Rule Engine #17 and Math
+   * Formula #18, with the median kWh of the models in it. Cells backed by
+   * fewer than three models are dropped rather than drawn from one product.
+   */
+  const HEAT_MIN_MODELS = 3;
+
+  function starBandHeat(rows) {
+    const cells = d3.flatRollup(rows.filter(d => !Number.isNaN(d.stars)),
+      v => ({ kwh: d3.median(v, d => d.kwh), models: v.length }),
+      d => d.band, d => d.stars);
+    return cells
+      .map(([band, stars, c]) => ({
+        band, stars, kwh: c.kwh, models: c.models,
+        cost: Math.round(c.kwh * DEFAULT_PRICE / 100)
+      }))
+      .filter(d => d.models >= HEAT_MIN_MODELS);
   }
 
   /* --- Size band ordering (used as a shared categorical domain) ---------- */
@@ -317,6 +339,6 @@ const VIZ = (() => {
     fmt, ENERGY_RAMP, energyScale, techColour, TECH_LABEL,
     showTip, moveTip, hideTip, tipHtml,
     makeSvg, describe, axisBottom, axisLeft, gridY, axisTitle,
-    msg, loadingMsg, failMsg, load, onResize, reducedMotion, dur, prettyBand
+    msg, loadingMsg, failMsg, load, starBandHeat, onResize, reducedMotion, dur, prettyBand
   };
 })();

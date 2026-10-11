@@ -217,15 +217,18 @@ per phase explaining *why*, not just what.
 
 ### Where each output goes
 
-The KNIME writers' files are kept, unedited, in **`data/knime_out/`**. The site loads
-**`data/out/`**, written by `knime/pipeline_reference.py`, which repeats every KNIME step in Python
-and adds the shaping the charts need that the workflow does not do: tidy names for the aggregate
-columns, the spread and cost columns for Act four, the star × band pivot for the heat map, the
-25-model brand cut, and `key_facts.csv`. [Section 5](#5-verifying-the-workflow) proves the two agree.
+The KNIME writers' files are in **`data/knime_out/`**, and **the site loads them directly**
+(`assets/js/charts.js` → `DATA`): #19 feeds Act one and Explore, #24 Act two, #21 Act four. The
+workflow has no pivot node, so Act three's heat map is grouped in the browser from #19's model table
+(`VIZ.starBandHeat`: median kWh per size band × whole stars, cells under three models dropped).
+`knime/pipeline_reference.py` repeats every step independently into `data/out/`, as the reference
+the KNIME output is checked against, and writes `key_facts.csv`, the source of every number in the
+prose. [Section 5](#5-verifying-the-workflow) proves the two agree.
 
-> **Before running the workflow again:** the four writers still point into `data/out/` (and #19 at
-> `desktop.csv`). Re-point them to `data/knime_out/` first, or KNIME will overwrite the files the site
-> loads — that is exactly how Act four broke once (B12). The reader and writer paths are absolute
+> **Before running the workflow again:** point the four writers at `data/knime_out/` (#19 as
+> `tv_clean.csv`). That is the folder the site loads. Writing into `data/out/` instead overwrites the
+> Python reference the verification compares against (and, before the site switched to KNIME's
+> files, blanked Act four — B12). The reader and writer paths are absolute
 > Windows paths; on another machine, re-point the CSV Reader at this repo's `data/raw/` file.
 
 ---

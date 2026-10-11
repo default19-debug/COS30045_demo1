@@ -63,19 +63,21 @@ administrative **census of the legal market**, not a sample. It contains no pers
 ```
 data/raw/tv_2026_10_04.csv
    │
-   ├── KNIME  knime/TV_Energy_TriTran.knwf  (29 nodes)       ──►  data/knime_out/   KNIME's own output
+   ├── KNIME  knime/TV_Energy_TriTran.knwf  (29 nodes)       ──►  data/knime_out/   what the site loads
    │
-   └── Python knime/pipeline_reference.py  (mirror + shaping) ──►  data/out/         what the site loads
+   └── Python knime/pipeline_reference.py  (independent copy) ──►  data/out/         the reference
                                                                         ▲
                     knime/verify_knime_outputs.py  checks the two agree ┘   →  PASS
 ```
 
-KNIME does the cleaning and aggregation; the Python mirror repeats it and adds the final shaping the
-charts need. `verify_knime_outputs.py` (standard library only) matches every row and value — all
+KNIME does the cleaning and aggregation, and the site loads its CSV Writer output directly
+(`assets/js/charts.js` → `DATA`). The Act three heat-map grid is grouped in the browser from KNIME's
+`tv_clean.csv`, since the workflow has no pivot node. The Python script repeats every step
+independently as a check. `verify_knime_outputs.py` (standard library only) matches every row and value — all
 4,599 models agree, with three explained differences documented in the walkthrough.
 
 ```bash
-python3 knime/verify_knime_outputs.py                              # check KNIME against the site data
+python3 knime/verify_knime_outputs.py                              # check KNIME against the reference
 python3 -m pip install pandas && python3 knime/pipeline_reference.py   # regenerate data/out/
 ```
 
